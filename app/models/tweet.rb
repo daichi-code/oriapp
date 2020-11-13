@@ -1,7 +1,7 @@
 class Tweet < ApplicationRecord
   has_one_attached :image
   belongs_to :user
-
+  has_many :comments
 
   with_options presence: true do
     validates :text
@@ -15,6 +15,14 @@ class Tweet < ApplicationRecord
     validates :category_id
     validates :season_id
     validates :prefecture_id
+  end
+
+  def self.search(search)
+    if search != ""
+      Tweet.where('text LIKE(?)', "%#{search}%")
+    else
+      Tweet.all
+    end
   end
 
 end

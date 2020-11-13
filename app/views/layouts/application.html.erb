@@ -20,7 +20,18 @@
             <ul class="user__info">
               <li>
                 <%= link_to "マイページ", "/users/#{current_user.id}" %>
+
+                <%= link_to "DM", new_room_path, method: :get%>
+
                 <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+
+                <% current_user.rooms.each do |room| %>
+                  <div class="room">
+                    <div class="room-name">
+                    <%= link_to room.name, room_messages_path(room) %>
+                    </div>
+                  </div>
+                <% end %>
               </li>
             </ul>
           </span>

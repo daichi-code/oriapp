@@ -1,0 +1,23 @@
+ja:
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      short: "%m/%d %H:%M"
+  activerecord:
+    attributes:
+      user:
+        nick_name: ニックネーム
+        first_name: 苗字
+        last_name: 名前
+        birthday: 生年月日
+      address:
+        postal_code: 郵便番号
+        address: 住所
+        prefecture_id: 県名
+      item:
+        title: タイトル
+        text: テキスト
+        images: 画像
+        category_id: カテゴリー
+        season_id: 季節
+        prefecture_id: 場所

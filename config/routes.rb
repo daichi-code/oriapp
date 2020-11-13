@@ -8,6 +8,14 @@ Rails.application.routes.draw do
   end
 
   root to: 'tweets#index'
-  resources :tweets
+  resources :tweets do
+    resources :comments, only: :create
+    collection do
+      get 'search'
+    end
+  end
   resources :users, only: :show
+  resources :rooms, only: [:new, :create, :destroy] do
+    resources :messages, only: [:index, :create]
+  end
 end

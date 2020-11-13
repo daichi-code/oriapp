@@ -1,15 +1,63 @@
 <div class="contents row">
-    <%= image_tag @tweet.image%>
-      <p><%= @tweet.text %></p>
-      <div class="more">
-        <ul class="more_list">
-          <li>
-            <%= link_to '編集', edit_tweet_path(@tweet.id), method: :get %>
-          </li>
-          <li>
-            <%= link_to '削除', tweet_path(@tweet.id), method: :delete %>
-          </li>
-        </ul>
-      </div>
+  <div class="content_po">
+    <span>
+      <p></p>
+    </span>
+      <%= image_tag @tweet.image %>
+        <div class="more">
+          <ul class="more_list">
+            <% if user_signed_in? && current_user.id == @tweet.user_id %>
+              <li>
+                <%= link_to '編集', edit_tweet_path(@tweet.id), method: :get %>
+              </li>
+              <li>
+                <%= link_to '削除', tweet_path(@tweet.id), method: :delete %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+    <div class="tweet-name">
+    <span class="name">
+      <a href="/users/<%= @tweet.user.id %>">
+        <span>投稿者 </span><%= @tweet.user.nickname %>
+      </a>
+    </span>
     </div>
+  <div class="tweettext">
+  <div class="textor">
+    <p>
+    <%= l @tweet.created_at, format: :short %>
+    </p>
+  </div>
+    <p><%= @tweet.text %></p>
+  </div>
+  <p>季節 ”<%#= @tweet.season_id.name%>”</p>
+  <p>場所 ”<%#= @tweet.prefecture_id.name%>”</p>
+  <div class="container">
+  <% if user_signed_in? %>
+    <%= form_with(model: [@tweet, @comment], method: :show, local: true) do |f| %>
+      <div class="field">
+        <%= f.label :text, "コメント" %><br />
+        <%= f.text_field :text %>
+      </div>
+  <div class="actions">
+    <%= f.submit "送信する", class: :form__btn  %>
+  </div>
+    <% end %>
+  <% end %>
+    <ul class="comments_lists">
+      <li class="comments_list">
+        <% if @comment %>
+          <% @comments.reverse_each do |comment| %>
+            <p>
+              <div id='comments'>
+                <strong><%= link_to comment.user.nickname, "/users/#{comment.user_id}" %>：</strong>
+                <%= comment.text %>
+              </div>
+            </p>
+          <% end %>
+        <% end %>
+      </li>
+    </ul>
+  </div>
 </div>

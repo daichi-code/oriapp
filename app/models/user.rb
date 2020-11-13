@@ -9,4 +9,9 @@ class User < ApplicationRecord
 
   has_many :tweets
   has_one :address #ログイン
+  has_many :comments
+
+  has_many :room_users
+  has_many :rooms, through: :room_users
+  has_many :messages
 end
