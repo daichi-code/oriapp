@@ -1,0 +1,57 @@
+<div class="contents row">
+  <div class="title1">
+    <p><%#= image_tag @user.image %></p>
+    <p><%= @nickname %> さんの投稿一覧</p>
+  </div>
+  <%#= link_to "ユーザー詳細の変更", new_user_path, method: :get %>
+  <%# <div class="like">
+    <div class="like1">いいね！している投稿</div>
+      <div class="like2"> %>
+        <%# @user.liked_posts.each do |post| %>
+          <%# <p>= link_to post.user.nickname, user_path(post.id), method: :get %>
+          <%#= link_to post.text, tweet_path(post.id), method: :get %>
+          <%# </p> %>
+        <%# end %>
+      <%# </div> %>
+
+
+  </div>
+  <p>
+  <div class="radius">
+      <% @tweets.each do |tweet| %>
+        <div class="radius2">
+          <div class="content_po">
+              <p>
+                <%= image_tag tweet.image %>
+              </p>
+            <div class="text1">
+            <div class="textor">
+              <p>
+              <%= l tweet.created_at, format: :short %>
+              </p>
+            </div>
+              <%= tweet.text %>
+            </div>
+            <div class="more">
+              <ul class="more_list">
+                <% if user_signed_in? %>
+                  <li>
+                    <%= link_to '詳細', tweet_path(tweet.id), method: :get %>
+                  </li>
+                <% end %>
+                <% if user_signed_in? && current_user.id == tweet.user_id %>
+                  <li>
+                    <%= link_to '編集', edit_tweet_path(tweet.id), method: :get %>
+                  </li>
+                  <li>
+                    <%= link_to '削除', tweet_path(tweet.id), method: :delete %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </p>
+</div>

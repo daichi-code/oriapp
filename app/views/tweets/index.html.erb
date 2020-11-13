@@ -1,0 +1,56 @@
+<div class="contents row">
+  <div class="radius">
+
+
+    <% @tweets.each do |tweet| %>
+    <div class="radius2">
+      <div class="content_po">
+        <p>
+          <%= image_tag tweet.image %>
+          <div class="text1">
+            <h3>
+              <p>投稿者
+                <%= link_to tweet.user.nickname, user_path(tweet.user.id), method: :get%>
+              </p>
+            </h3>
+            <div class="textor">
+              <p>
+              <%= l tweet.created_at, format: :short %>
+              </p>
+            </div>
+              <%= tweet.text %>
+          </div>
+          <div class="textlike">
+            <h3>
+              <p>
+                <span>いいね！件数：</span><%#= tweet.liked_users.count %>
+              </p>
+            </h3>
+          </div>
+          <div class="more">
+            <ul class="more_list">
+            <% if user_signed_in? %>
+              <li>
+                <%= link_to '詳細', tweet_path(tweet.id), method: :get %>
+              </li>
+            <% end %>
+              <% if user_signed_in? && current_user.id == tweet.user_id %>
+              <li>
+                <%= link_to '編集', edit_tweet_path(tweet.id), method: :get %>
+              </li>
+              <li>
+                <%= link_to '削除', tweet_path(tweet.id), method: :delete %>
+              </li>
+              <% end %>
+            </ul>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="page">
+        <%#= paginate @tweets %>
+      </div>
+    </p>
+  </div>
+</div>
