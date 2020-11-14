@@ -13,8 +13,8 @@ class TweetsController < ApplicationController
 
   def create
     @tweet = Tweet.new(tweet_params)
-    if @tweet.valid?
-      @tweet.save
+    binding.pry
+    if @tweet.save
       redirect_to root_path
     else
       render :new
@@ -23,9 +23,10 @@ class TweetsController < ApplicationController
 
   def destroy
     @tweet = Tweet.find(params[:id])
-    # if user_signed_in? && current_user.id == @.user_id
+    if user_signed_in? && current_user.id == @tweet.user_id
     @tweet.destroy
     redirect_to root_path
+    end
   end
 
   def edit
@@ -56,7 +57,7 @@ class TweetsController < ApplicationController
 
   private
   def tweet_params
-    params.require(:tweet).permit(:text, :season_id, :prefecture_id, :category_id, images: []).merge(user_id: current_user.id)
+    params.require(:tweet).permit(:text, :season_id, :prefecture_id, :category_id, :image).merge(user_id: current_user.id)
   end
 
   def set_tweet

@@ -1,5 +1,5 @@
 class Tweet < ApplicationRecord
-  has_many_attached :images
+  has_one_attached :image
   belongs_to :user
   has_many :comments
 
@@ -14,7 +14,7 @@ class Tweet < ApplicationRecord
     validates :category_id
     validates :prefecture_id
     validates :season_id
-    validates :images
+    validates :image
   end
 
   with_options numericality: { other_than: 1 } do

@@ -1,19 +1,14 @@
 <div class="contents row">
   <div class="container">
     <h3>投稿する</h3>
-      <%= form_with model: @tweet, url: tweets_path, local: true do |f| %>
+      <%= form_with(model: @tweet, url: tweets_path, local: true) do |f| %>
       <%= render 'shared/error_messages', model: f.object %>
 
-      <%= f.file_field :images, name: 'tweets_tag[images][]', id: 'tweet_image' %>
+      <%= f.file_field :image %>
 
-      <div id="image-list"></div>
+      <%# <div id="image-list"></div> %>
 
-      <%# <div class="tags">
-      <%= f.label :message, "タグ" %>
-      <%# <%= f.text_field :message %>
-      <%# </div> %>
-
-      <div id="search-result"></div>
+      <%# <div id="search-result"></div> %>
 
       <div class="weight-bold-text">
         Category
