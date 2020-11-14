@@ -10,7 +10,6 @@ class Tweet < ApplicationRecord
 
 
   with_options presence: true do
-    validates :text
     validates :category_id
     validates :prefecture_id
     validates :season_id
