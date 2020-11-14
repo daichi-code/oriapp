@@ -14,7 +14,9 @@
     <div class="radius2">
       <div class="content_po">
         <p>
-          <%= image_tag tweet.image %>
+          <% tweet.images.each do |image| %>
+            <%= image_tag image %>
+          <% end %>
           <div class="text1">
             <h3>
               <p>投稿者

@@ -19,4 +19,7 @@ class Category < ActiveHash::Base
     { id: 16, name: 'アニメ・漫画'},
     { id: 17, name: 'なし'}
   ]
+
+  include ActiveHash::Associations
+  has_many :tweets
 end

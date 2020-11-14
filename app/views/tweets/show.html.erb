@@ -3,7 +3,9 @@
     <span>
       <p></p>
     </span>
-      <%= image_tag @tweet.image %>
+          <% @tweet.images.each do |image| %>
+            <%= image_tag image %>
+          <% end %>
         <div class="more">
           <ul class="more_list">
             <% if user_signed_in? && current_user.id == @tweet.user_id %>
@@ -31,8 +33,8 @@
   </div>
     <p><%= @tweet.text %></p>
   </div>
-  <p>季節 ”<%#= @tweet.season_id.name%>”</p>
-  <p>場所 ”<%#= @tweet.prefecture_id.name%>”</p>
+  <p>季節：”<%= @tweet.season.name%>”</p>
+  <p>場所：”<%= @tweet.prefecture.name%>”</p>
   <div class="container">
   <% if user_signed_in? %>
     <%= form_with(model: [@tweet, @comment], method: :show, local: true) do |f| %>

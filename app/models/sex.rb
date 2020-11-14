@@ -5,4 +5,8 @@ class Sex < ActiveHash::Base
     { id: 3, name: '女性'},
     { id: 4, name: 'どちらでもない'}
   ]
+
+  include ActiveHash::Associations
+  has_many :addresses
+
 end

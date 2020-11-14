@@ -7,4 +7,8 @@ class Season < ActiveHash::Base
     { id: 5, name: '冬・winter'},
     { id: 6, name: 'なし'}
   ]
+
+  include ActiveHash::Associations
+  has_many :tweets
+
 end

@@ -52,4 +52,8 @@ class Prefecture < ActiveHash::Base
     {id: 49, name: '海外'},
     {id: 50, name: 'その他'}
   ]
+
+  include ActiveHash::Associations
+  has_many :tweets
+
 end
