@@ -1,0 +1,4 @@
+<h2>フォロワー</h2>
+<%= @users.each do |user| %>
+<%= link_to user.nickname, user_path(user.id), method: :get %>
+<% end %>

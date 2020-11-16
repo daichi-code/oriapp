@@ -1,0 +1,9 @@
+<h2>フォロー中</h2>
+<%= @users.each do |user| %>
+<table>
+<tr>
+  <td> <%= link_to user.nickname, user_path(user.id) %></td>
+</tr>
+
+</table>
+<% end %>

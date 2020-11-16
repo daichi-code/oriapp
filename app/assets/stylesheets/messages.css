@@ -1,11 +1,3 @@
-.wrapper {
-  display: flex;
-}
-.side-bar {
-  background-color: #253141;
-  width: 300px;
-  height: 100vh;
-}
 
 .side-bar-header {
   height: 100px;
@@ -51,10 +43,6 @@
 .room-name a {
   text-decoration: none;
   color: white;
-}
-.chat {
-  background-color: #ffffff;
-  width: calc(100% - 300px);
 }
 .chat-header {
   height: 100px;

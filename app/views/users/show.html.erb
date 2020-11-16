@@ -3,6 +3,9 @@
     <p><%#= image_tag @user.image %></p>
     <p><%= @nickname %> さんの投稿一覧</p>
   </div>
+  <%= render 'relationships/follow_button', user: @user %>
+  <%= link_to "フォロー: #{@user.followings.count}", followings_user_path(@user.id), method: :get %>
+  <%= link_to "フォロワー: #{@user.followers.count}", followers_user_path(@user.id), method: :get %>
   <%#= link_to "ユーザー詳細の変更", new_user_path, method: :get %>
   <%# <div class="like">
     <div class="like1">いいね！している投稿</div>
