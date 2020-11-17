@@ -1,0 +1,6 @@
+<h2>いいねしている投稿</h2>
+        <% @user.like_ids.each do |tweet| %>
+          <p><%#= link_to tweet.user.nickname, user_path(tweet.id), method: :get %>さんの投稿：
+          <%#= link_to tweet.image, item_path(tweet.id), method: :get %>
+          </p>
+        <% end %>

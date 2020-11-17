@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   root to: 'tweets#index'
   resources :tweets do
     resources :comments, only: :create
+    resources :likes, only: [:create, :destroy]
     collection do
       get 'search'
     end
@@ -18,6 +19,8 @@ Rails.application.routes.draw do
   resources :users, only: :show do
     get :followings, on: :member
     get :followers, on: :member
+    get :likes, on: :member
+    get :liked, on: :member
   end
 
   resources :rooms, only: [:new, :create, :destroy] do

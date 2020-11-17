@@ -1,7 +1,10 @@
 class Tweet < ApplicationRecord
   has_one_attached :image
   belongs_to :user
-  has_many :comments
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :liked_users, dependent: :destroy, through: :likes, source: :user
+
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :category

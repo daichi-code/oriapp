@@ -1,10 +1,11 @@
 class TweetsController < ApplicationController
   before_action :move_to_index, except: [:index, :show, :search]
-  before_action :set_tweet, only: [:edit, :show]
+  before_action :set_tweet, only: [:edit, :show, :update, :destroy]
 
 
   def index
     @tweets = Tweet.includes(:user).order("created_at DESC")
+    @like = Like.new
   end
 
   def new
@@ -21,7 +22,6 @@ class TweetsController < ApplicationController
   end
 
   def destroy
-    @tweet = Tweet.find(params[:id])
     if user_signed_in? && current_user.id == @tweet.user_id
     @tweet.destroy
     redirect_to root_path
@@ -29,11 +29,9 @@ class TweetsController < ApplicationController
   end
 
   def edit
-    @tweet = Tweet.find(params[:id])
   end
 
   def update
-    tweet = Tweet.find(params[:id])
     tweet.update(tweet_params)
     if tweet.valid?
       tweet.save
@@ -46,6 +44,7 @@ class TweetsController < ApplicationController
   def show
     @comment = Comment.new
     @comments = @tweet.comments.includes(:user)
+    @like = Like.new
   end
 
   def search

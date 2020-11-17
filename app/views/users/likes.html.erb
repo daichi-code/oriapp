@@ -1,0 +1,4 @@
+<h2>いいねしているユーザー</h2>
+<%= @users.each do |user| %>
+<%= link_to user.id, user_path(user.id), method: :get %>
+<% end %>

@@ -14,4 +14,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @users = @user.followers.all
   end
+
+  def likes
+    @user = Tweet.find(params[:id])
+    @users = @user.likes.all
+  end
+
+  def liked
+    @user = User.find(params[:id])
+    @users = Like.where(user_id: @user.id)
+  end
 end

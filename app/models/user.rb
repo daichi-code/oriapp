@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :tweets
   has_one :address #ログイン
   has_many :comments
+  has_many :likes
+  has_many :liked_posts, through: :likes, source: :item
 
   has_many :room_users
   has_many :rooms, through: :room_users
@@ -34,4 +36,9 @@ class User < ApplicationRecord
   def following?(other_user)
     self.followings.include?(other_user)
   end
+
+  def already_liked?(tweet)
+    self.likes.exists?(tweet_id: tweet.id)
+  end
+
 end
