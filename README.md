@@ -1,24 +1,112 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# アプリケーション名
+  Pic Share
 
-Things you may want to cover:
+# アプリケーションの概要
+  写真投稿型sns
 
-* Ruby version
+# URL
+  https://oriapp-daichi.herokuapp.com/
 
-* System dependencies
+# テスト用アカウント
+  アカウント1:a@a
+  パスワード1:aaa111
 
-* Configuration
+  アカウント2:aa@aa
+  パスワード2:aaa111
 
-* Database creation
+# 制作背景
+  このアプリケーションを通じて、写真家や、写真を撮ったりなど写真を大好きな方達のための気軽に写真が投稿でき、かつ細かなカテゴリー分けができる
 
-* Database initialization
+# 洗い出した要件
+| 機能 ----------- | 目的 --------------------------------- | 詳細 ------------------------------------------- | ストーリー -----------------
+| ---------------- | -------------------------------------- | ------------------------------------------------ | ----------------------------
+| ログイン機能 --- | ログインができるようにする ----------- | ユーザーのログイン・ログアウトができるようにする | ログインができ行える機能の幅が変わる
+| 投稿機能 ------- | 投稿ができるようにする --------------- | 投稿ができ表示ができるようにする --------------- | 今アプリの主軸の投稿機能で好きなものを投稿できる
+| コメント機能 --- | コメントができるようにする ----------- | ユーザーが投稿にコメントをつけることができる --- | 投稿に対してユーザーが好きなことをコメントできる
+| いいね機能 ----- | 投稿にいいねができるようにする ------- | 投稿にいいねをでき確認ができる ----------------- | 投稿にいいねをつけられるため評価される、確認ができる
+| カテゴリーの追加 | 投稿にカテゴリーを追加できるようにする | カテゴリーを追加できカテゴリー分けをする ------- | カテゴリー選択により濃密な投稿にできる
+| フォロー機能 --- | フォローフォロワー機能 --------------- | 相互フォローできるようにする ------------------- | フォロー、フォロワー間になりより充実する
+| チャット機能 --- | ユーザー同士のチャット機能 ----------- | DMをユーザーが行える --------------------------- | チャット機能でユーザーの簡単な連絡が取れる
+| ページネーション | ページネーション機能 ----------------- | 画面に載せた画像を見やすくする------------------ | ページネーションを行えるようにする
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+# 実装した機能の説明
+  1,ログイン機能：ユーザーがログインできるようにする。ウィザード形式を用いて行う。
+  2,投稿機能：ユーザーがタグを付け、カテゴリー選択できる投稿を行える
+  3,コメント機能：投稿に対してコメントをすることができる
+  4,いいね機能：投稿に対していいねを付けられるため投稿意欲が湧く
+  5,チャット機能：ユーザー同士がチャットできるような機能、画像も送信することができる
+  6,フォロー機能：ユーザー同士のフォローができるようになるフォローしている人同士をみることができる
+  7,ページネーション機能：１ページに複数枚の画像が載ることはなく１ページに載せる枚数を限定する
 
-* ...
+# 今後追加予定の機能
+| 通知機能 ------- | 実装済みの機能の通知を行う ----------- | いいね・フォロー・コメント機能の通知が届く ----- | それぞれの通知により確認がスムーズにできる
+| sns認証 -------- | 他snsでのログイン機能 ---------------- | 他のsnsでログインができるようにする ------------ | ログインが簡単にできる
+
+# アプリケーションの課題
+  今後追加予定の機能の追加。
+  フロントの見た目。
+
+# 工夫したポイント
+  いいね機能の追加、チャット機能の追加、フォロー機能の追加、
+
+# 使用技術(開発環境)
+  Ruby on Rails ver6.0
+
+# データベース設計
+  https://gyazo.com/735aab0b6e422c0059aa4d2ddfadc8e7
+
+# ローカルでの動作方法
+  git clone https://github.com/daichi-code/oriapp.git
+  cd oriapp
+  bundle install
+  bin/rails db:migrate
+  bin/rails s
+
+
+
+## users テーブル
+| Column        | Type      | Options     |
+| ------------- | --------- | ------------|
+| nick_name     | string    | null: false |
+| email         | string    | null: false |
+| password      | string    | null: false |
+| first_name    | string    | null: false |
+| last_name     | string    | null: false |
+| birthday      | date      | null: false |
+
+ - has_many :items
+ - has_many :comments
+
+
+
+## items テーブル
+| Column       | Type         | Options                        |
+| ------------ | ------------ | -------------------------------|
+| title        | string       | null: false                    |
+| text         | text         | null: false                    |
+| year_id      | integer      | null: false                    |
+| month_id     | integer      | null: false                    |
+| category_id  | integer      | null: false                    |
+| user         | references   | null: false, foreign_key: true |
+
+### Association
+ - belongs_to :user
+ - has_many :comments
+
+
+
+## comments テーブル
+| Column | Type        | Options                        |
+| ------ | ----------- | ------------------------------ |
+| text   | text        | null: false                    |
+| user   | references  | null: false, foreign_key: true |
+| item   | references  | null: false, foreign_key: true |
+
+### Association
+ - belongs_to :user
+ - belongs_to :item
+

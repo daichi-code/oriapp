@@ -9,10 +9,8 @@
   <%#= link_to "ユーザー詳細の変更", new_user_path, method: :get %>
   <div class="like">
     <div class="like1">
-      <% @user.like_ids.each do |tweet| %>
         <p><%= link_to 'いいねした投稿', liked_user_path, method: :get %>
         </p>
-      <% end %>
     </div>
   </div>
   <p>

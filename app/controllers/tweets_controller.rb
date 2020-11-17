@@ -4,7 +4,7 @@ class TweetsController < ApplicationController
 
 
   def index
-    @tweets = Tweet.includes(:user).order("created_at DESC")
+    @tweets = Tweet.page(params[:page]).per(3).reverse_order
     @like = Like.new
   end
 
@@ -32,10 +32,10 @@ class TweetsController < ApplicationController
   end
 
   def update
-    tweet.update(tweet_params)
-    if tweet.valid?
-      tweet.save
-      redirect_to tweet_path(tweet.id)
+    @tweet.update(tweet_params)
+    if @tweet.valid?
+      @tweet.save
+      redirect_to tweet_path(@tweet.id)
     else
       render :edit
     end
